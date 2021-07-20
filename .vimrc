@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2021-07-19T17:43:05+0530
+" Last-Modified     : 2021-07-20T11:14:46+0530
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 " 
@@ -252,6 +252,12 @@ set t_vb=
 set tm=500
 
 " Colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" fixes glitch? in colors when using vim with tmux
+set background=dark
+set t_Co=256
+
 set termguicolors     " enable true colors support
 let ayucolor="dark"   " for dark version of theme
 set background="dark"
