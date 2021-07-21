@@ -3,9 +3,11 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2021-07-20T11:14:46+0530
+" Last-Modified     : 2021-07-21T13:44:50+0530
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
+"   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
+"   Wed Jul 21 01:44:37 PM IST 2021 : Add fix for kitty
 " 
 set nocompatible
 
@@ -149,22 +151,24 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 " Call plugin
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/syntastic'
 Plug 'alpertuna/vim-header'
-Plug 'rafaqz/ranger.vim'
-Plug 'ayu-theme/ayu-vim'
+Plug 'whatyouhide/vim-gotham'
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'axvr/org.vim'
+" Plug 'dense-analysis/ale'
+Plug 'rafaqz/ranger.vim', { 'on': 'RangerTab'}
+Plug 'axvr/org.vim', { 'for': 'org' }
+" Plug 'neoclide/coc.nvim', {'branch': 'release'} 
+Plug 'tpope/vim-fugitive', { 'on': 'G' }
 
 call plug#end()
 
 "Customization 4 Plugins
 let g:lightline = {
-      \ 'colorscheme': 'ayu_dark',
+      \ 'colorscheme': 'gotham256',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -181,6 +185,50 @@ let g:header_field_modified_by = 0
 let g:header_field_license_id = 'BSD-3-Clause'
 let g:header_field_timestamp_format = '%FT%T%z'
 
+""" vim ALE stuff"""
+" let g:ale_disable_lsp = 1 " make ale work better with coc
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" let g:ale_sign_error = '●'
+" let g:ale_sign_warning = '.'
+" """ End Vim Ale
+
+" """ vim coc stuff
+" " always show signcolumns
+" " Always show the signcolumn, otherwise it would shift the text each time
+" " diagnostics appear/become resolved.
+" if has("patch-8.1.1564")
+"   " Recently vim can merge signcolumn and number column into one
+"   set signcolumn=number
+" else
+"   set signcolumn=yes
+" endif
+" " Use <c-space> to trigger completion.
+" inoremap <silent><expr> <c-space> coc#refresh()
+
+" " Use tab for trigger completion with characters ahead and navigate.
+" " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+" " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" " Coc only does snippet and additional edit on confirm.
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" " required by coc
+" set cmdheight=1
+" set updatetime=300
+" set shortmess+=c
+" set signcolumn=yes
+""" End vim coc
 
 "Leader magic
 noremap <SPACE> <Nop>
@@ -240,7 +288,7 @@ map <leader>ss :BLines<cr>
 map <leader>sl :Lines<cr>
 map <leader>sd :Rg<cr>
 
-" Reload vimrc
+ " Reload vimrc
 map <leader>rr :source $HOME/.vimrc<cr>
 
 " Clear highlights
@@ -255,10 +303,10 @@ set tm=500
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " fixes glitch? in colors when using vim with tmux
-set background=dark
 set t_Co=256
-
+" Fix weird glitches in kitty
+if &term == 'xterm-kitty'
+    let &t_ut=''
+endif
 set termguicolors     " enable true colors support
-let ayucolor="dark"   " for dark version of theme
-set background="dark"
-colorscheme ayu
+colorscheme gotham256 
