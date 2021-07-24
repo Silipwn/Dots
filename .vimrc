@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2021-07-21T13:44:50+0530
+" Last-Modified     : 2021-07-23T15:11:08+0530
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
@@ -158,11 +158,12 @@ Plug 'alpertuna/vim-header'
 Plug 'whatyouhide/vim-gotham'
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
-" Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 Plug 'rafaqz/ranger.vim', { 'on': 'RangerTab'}
 Plug 'axvr/org.vim', { 'for': 'org' }
-" Plug 'neoclide/coc.nvim', {'branch': 'release'} 
-Plug 'tpope/vim-fugitive', { 'on': 'G' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'} 
+Plug 'tpope/vim-fugitive', { 'on': ['Git','Gdiffsplit'] }
+Plug 'easymotion/vim-easymotion'
 
 call plug#end()
 
@@ -186,49 +187,68 @@ let g:header_field_license_id = 'BSD-3-Clause'
 let g:header_field_timestamp_format = '%FT%T%z'
 
 """ vim ALE stuff"""
-" let g:ale_disable_lsp = 1 " make ale work better with coc
-" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-" nmap <silent> <C-j> <Plug>(ale_next_wrap)
-" let g:ale_sign_error = '●'
-" let g:ale_sign_warning = '.'
-" """ End Vim Ale
+let g:ale_disable_lsp = 1 " make ale work better with coc
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+""" End Vim Ale
 
-" """ vim coc stuff
-" " always show signcolumns
-" " Always show the signcolumn, otherwise it would shift the text each time
-" " diagnostics appear/become resolved.
-" if has("patch-8.1.1564")
-"   " Recently vim can merge signcolumn and number column into one
-"   set signcolumn=number
-" else
-"   set signcolumn=yes
-" endif
-" " Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
+""" vim coc stuff
+" always show signcolumns
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
-" " Use tab for trigger completion with characters ahead and navigate.
-" " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-" " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" " Coc only does snippet and additional edit on confirm.
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" " required by coc
-" set cmdheight=1
-" set updatetime=300
-" set shortmess+=c
-" set signcolumn=yes
-""" End vim coc
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" required by coc
+set cmdheight=1
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+" """ End vim coc
+
+""" Coc Extensions
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-clangd']
 
 "Leader magic
 noremap <SPACE> <Nop>
@@ -267,7 +287,8 @@ map <leader>s? z=
 " Fast saving
 nmap <leader>w :w!<cr>
 " Fugitive
-map <leader>gg :G<CR>
+map <leader>gg :Git<CR>
+map <leader>gd :Gdiffsplit<CR>
 " Ranger
 map <leader>rr :RangerEdit<cr>
 map <leader>rv :RangerVSplit<cr>
@@ -291,6 +312,21 @@ map <leader>sd :Rg<cr>
  " Reload vimrc
 map <leader>rr :source $HOME/.vimrc<cr>
 
+" Jump fast
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
 " Clear highlights
 map <leader>// :noh<CR>
 " No annoying sound on errors
