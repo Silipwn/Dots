@@ -1,13 +1,14 @@
-" Finis coronat opus; Run at your own peril @silipwn;
+" Finis coronat opus; Run at your own PERIL @SILipwn;
 " File              : .vimrc
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2021-07-23T15:11:08+0530
+" Last-Modified     : 2021-09-13T15:42:53-0400
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
 "   Wed Jul 21 01:44:37 PM IST 2021 : Add fix for kitty
+"   2021-09-07T23:26:09-0400 : Remove ranger, use nerdtree
 " 
 set nocompatible
 
@@ -125,7 +126,9 @@ endfunction
 
 "" 2021-06-18T05:55:11+0000 : Added macro for adding time : silipwn
 iab cmtime <c-r>=strftime("%FT%T%z: silipwn: <why>")<cr>
+iab timest <c-r>=strftime("%c: silipwn: <why>")<cr>
 
+"" TODO 2021-08-04T10:21:49+0530: silipwn: Header
 
 """ Add undo magic
 "" 2021-07-19T13:11:31+0530: silipwn: Undo
@@ -143,7 +146,10 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
-
+" 2021-08-03T09:24:38+0530: silipwn: Add nice looks
+"eol:↲ : Eww, pretty in the face
+set showbreak=↪\ 
+set listchars=tab:│·,trail:·,nbsp:␣,extends:›,precedes:‹
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
@@ -159,11 +165,15 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
-Plug 'rafaqz/ranger.vim', { 'on': 'RangerTab'}
 Plug 'axvr/org.vim', { 'for': 'org' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 Plug 'tpope/vim-fugitive', { 'on': ['Git','Gdiffsplit'] }
+Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
+Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
+Plug 'roman/golden-ratio'
 
 call plug#end()
 
@@ -237,6 +247,8 @@ function! s:show_documentation()
   endif
 endfunction
 
+set background=dark
+
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -248,7 +260,7 @@ set signcolumn=yes
 " """ End vim coc
 
 """ Coc Extensions
-let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-clangd']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-clangd', 'coc-snippets']
 
 "Leader magic
 noremap <SPACE> <Nop>
@@ -269,6 +281,10 @@ map <leader>wj :wincmd j<CR>
 map <leader>wk :wincmd k<CR>
 map <leader>wl :wincmd l<CR>
 
+" Split
+map <leader>wv :vsp<CR>
+map <leader>ws :sp<CR>
+
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
@@ -276,9 +292,11 @@ map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
+" Pressing ,sc will toggle and untoggle spell checking
+map <leader>sc :setlocal spell!<cr>
 
+" Toggle paste mode on and off:
+map <leader>pp :setlocal paste!<cr>
 " Shortcuts using <leader>
 map <leader>sn ]s
 map <leader>sp [s
@@ -289,17 +307,20 @@ nmap <leader>w :w!<cr>
 " Fugitive
 map <leader>gg :Git<CR>
 map <leader>gd :Gdiffsplit<CR>
-" Ranger
-map <leader>rr :RangerEdit<cr>
-map <leader>rv :RangerVSplit<cr>
-map <leader>rs :RangerSplit<cr>
-map <leader>rt :RangerTab<cr>
-map <leader>ri :RangerInsert<cr>
-map <leader>ra :RangerAppend<cr>
-map <leader>rc :set operatorfunc=RangerChangeOperator<cr>g@
-map <leader>rd :RangerCD<cr>
-map <leader>rld :RangerLCD<cr>
+map <leader>gb :Git blame<CR>
+" NerdTree
+map <leader>nf :NERDTreeFocus<CR>
+map <leader>no :NERDTree<CR>
+map <leader>nt :NERDTreeToggle<CR>
+map <leader>ns :NERDTreeFind<CR>
 
+" Start NERDTree, unless a file or session is specified, eg. vim -S session_file.vim.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+let NERDTreeQuitOnOpen=3
 " fzf.vim
 map <leader>ff :Files<cr>
 map <leader>fr :History<cr>
@@ -335,6 +356,10 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" :W sudo saves the file 
+" (useful for handling the permission-denied error)
+command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
 " Colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -345,4 +370,7 @@ if &term == 'xterm-kitty'
     let &t_ut=''
 endif
 set termguicolors     " enable true colors support
-colorscheme gotham256 
+colorscheme gotham
+
+" Italics suppots
+highlight Comment cterm=italic
