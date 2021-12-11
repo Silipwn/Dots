@@ -1,20 +1,29 @@
-" Finis coronat opus; Run at your own PERIL @SILipwn;
+" Finis coronat opus; Run at your own peril ~ Silipwn;
 " File              : .vimrc
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2021-09-13T15:42:53-0400
+" Last-Modified     : 2021-12-11T09:53:04-0500
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
 "   Wed Jul 21 01:44:37 PM IST 2021 : Add fix for kitty
 "   2021-09-07T23:26:09-0400 : Remove ranger, use nerdtree
-" 
+"   2021-11-27T10:12:45-0500: silipwn: Add additional packages and change theme
+
+" Set 'nocompatible' to ward off unexpected things that your distro might
+" have made, as well as sanely reset options when re-sourcing .vimrc
 set nocompatible
+
+" Global variable with machine config
+" If standard install, then stick to 0
+" If have all dependecies like node and stuff, use 1
+let g:silipwn_machine_mode = 0
 
 syntax enable                  " Enable syntax highlighting.
 
 set autoindent             " Indent according to previous line.
+set cindent                " Indent with C like requirements
 set expandtab              " Use spaces instead of tabs.
 set softtabstop =4         " Tab key indents by 4 spaces.
 set shiftwidth  =4         " >> indents by 4 spaces.
@@ -49,12 +58,14 @@ set synmaxcol   =200       " Only highlight the first 200 columns.
 
 set list                   " Show non-printable characters.
 
-set nu
+set nu                     " Needs numbers in life
 
 " Turn on the Wild menu
 set wildmenu
+
 " Show partial commands in the last line of the screen
 set showcmd
+
 " A buffer becomes hidden when it is abandoned
 set hid
 
@@ -62,9 +73,6 @@ set hid
 " dialogue asking if you wish to save changed files.
 set confirm
 
-" Set 'nocompatible' to ward off unexpected things that your distro might
-" have made, as well as sanely reset options when re-sourcing .vimrc
-set nocompatible
 
 " Attempt to determine the type of a file based on its name and possibly its
 " contents. Use this to allow intelligent auto-indenting for each filetype,
@@ -80,11 +88,11 @@ endif
 
 " Ruler for editor
 execute "set colorcolumn=80," . join(range(120,150), ",")
-
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 set numberwidth=3
 set cpoptions+=n
+
 if has('multi_byte') && &encoding ==# 'utf-8'
   let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 else
@@ -98,6 +106,7 @@ if &shell =~# 'fish$'
 endif
 
 " Update time from emacs
+" Based on https://gist.github.com/rkumar/4166881
 autocmd! BufWritePre * :call s:timestamp()
 " to update timestamp when saving if its in the first 20 lines of a file
 function! s:timestamp()
@@ -128,8 +137,6 @@ endfunction
 iab cmtime <c-r>=strftime("%FT%T%z: silipwn: <why>")<cr>
 iab timest <c-r>=strftime("%c: silipwn: <why>")<cr>
 
-"" TODO 2021-08-04T10:21:49+0530: silipwn: Header
-
 """ Add undo magic
 "" 2021-07-19T13:11:31+0530: silipwn: Undo
 set undofile                " Save undos after file closes
@@ -146,40 +153,46 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
+
 " 2021-08-03T09:24:38+0530: silipwn: Add nice looks
 "eol:↲ : Eww, pretty in the face
 set showbreak=↪\ 
 set listchars=tab:│·,trail:·,nbsp:␣,extends:›,precedes:‹
+
 " Run PlugInstall if there are missing plugins
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
+
 " Call plugin
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/syntastic'
-Plug 'alpertuna/vim-header'
-Plug 'whatyouhide/vim-gotham'
+Plug 'Silipwn/vim-header'
+Plug 'mhartington/oceanic-next'
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'dense-analysis/ale'
 Plug 'axvr/org.vim', { 'for': 'org' }
-Plug 'neoclide/coc.nvim', {'branch': 'release'} 
 Plug 'tpope/vim-fugitive', { 'on': ['Git','Gdiffsplit'] }
 Plug 'preservim/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 Plug 'roman/golden-ratio'
+Plug 'airblade/vim-gitgutter'
+Plug 'ojroques/vim-oscyank'
+if silipwn_machine_mode == 1
+  Plug 'neoclide/coc.nvim', {'branch': 'release'} 
+  Plug 'dense-analysis/ale'
+endif
 
 call plug#end()
 
 "Customization 4 Plugins
 let g:lightline = {
-      \ 'colorscheme': 'gotham256',
+      \ 'colorscheme': 'oceanicnext',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -189,8 +202,8 @@ let g:lightline = {
       \ },
       \ }
 let g:header_field_author = 'silipwn'
-let g:header_field_author_email = '(contact at as-hw.in)'
-let g:header_field_copyright = 'Finis coronat opus; Run at your own peril @silipwn;' 
+let g:header_field_author_email = 'contact at as-hw.in'
+let g:header_field_copyright = 'Finis coronat opus; Run at this code at your own peril ~ silipwn;' 
 let g:header_auto_add_header = 0
 let g:header_field_modified_by = 0
 let g:header_field_license_id = 'BSD-3-Clause'
@@ -247,7 +260,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-set background=dark
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -265,6 +277,7 @@ let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-clangd', 'coc-sni
 "Leader magic
 noremap <SPACE> <Nop>
 let mapleader=" "
+
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
@@ -297,17 +310,21 @@ map <leader>sc :setlocal spell!<cr>
 
 " Toggle paste mode on and off:
 map <leader>pp :setlocal paste!<cr>
+
 " Shortcuts using <leader>
 map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+
 " Fast saving
 nmap <leader>w :w!<cr>
+
 " Fugitive
 map <leader>gg :Git<CR>
 map <leader>gd :Gdiffsplit<CR>
 map <leader>gb :Git blame<CR>
+
 " NerdTree
 map <leader>nf :NERDTreeFocus<CR>
 map <leader>no :NERDTree<CR>
@@ -317,10 +334,15 @@ map <leader>ns :NERDTreeFind<CR>
 " Start NERDTree, unless a file or session is specified, eg. vim -S session_file.vim.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
+
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
+" 2021-11-10T07:39:39-0500: silipwn: Markdown folds
+au FileType markdown setlocal foldlevel=99
+
 let NERDTreeQuitOnOpen=3
+
 " fzf.vim
 map <leader>ff :Files<cr>
 map <leader>fr :History<cr>
@@ -348,8 +370,10 @@ nmap <Leader>L <Plug>(easymotion-overwin-line)
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
+
 " Clear highlights
 map <leader>// :noh<CR>
+
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
@@ -363,14 +387,37 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " Colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
 " fixes glitch? in colors when using vim with tmux
 set t_Co=256
+
 " Fix weird glitches in kitty
 if &term == 'xterm-kitty'
     let &t_ut=''
 endif
-set termguicolors     " enable true colors support
-colorscheme gotham
 
-" Italics suppots
+" Let's make things colorful
+set background=dark
+set termguicolors     " enable true colors support
+colorscheme OceanicNext
+
+" Notes
+map <leader>nn :Files $HOME/Dropbox/LogSeq/<CR>
+
+" Italics support
 highlight Comment cterm=italic
+
+" Enables storing notes in a better way
+augroup QuickNotes
+    autocmd!
+    autocmd BufWinLeave *.md execute "mkview! " . expand('<afile>:p:h') . "/." . expand('<afile>:t') . ".view"
+    autocmd BufWinEnter *.md execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
+augroup END
+
+" Better diffing
+if has("patch-8.1.0360")
+    set diffopt+=internal,algorithm:patience
+endif
+
+" Enable yanking from remote terminals
+vnoremap <leader>yy :OSCYank<CR>
