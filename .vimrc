@@ -3,13 +3,14 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2021-12-11T09:53:04-0500
+" Last-Modified     : 2021-12-16T22:18:56-0500
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
 "   Wed Jul 21 01:44:37 PM IST 2021 : Add fix for kitty
 "   2021-09-07T23:26:09-0400 : Remove ranger, use nerdtree
 "   2021-11-27T10:12:45-0500: silipwn: Add additional packages and change theme
+"   Thu 16 Dec 2021 10:18:48 PM EST: silipwn: Adding ctags support
 
 " Set 'nocompatible' to ward off unexpected things that your distro might
 " have made, as well as sanely reset options when re-sourcing .vimrc
@@ -136,6 +137,7 @@ endfunction
 "" 2021-06-18T05:55:11+0000 : Added macro for adding time : silipwn
 iab cmtime <c-r>=strftime("%FT%T%z: silipwn: <why>")<cr>
 iab timest <c-r>=strftime("%c: silipwn: <why>")<cr>
+iab notest <c-r>=strftime("[[%b %d(th st nd rd), %Y]] %H:%M")<cr>
 
 """ Add undo magic
 "" 2021-07-19T13:11:31+0530: silipwn: Undo
@@ -183,6 +185,7 @@ Plug 'honza/vim-snippets'
 Plug 'roman/golden-ratio'
 Plug 'airblade/vim-gitgutter'
 Plug 'ojroques/vim-oscyank'
+Plug 'preservim/tagbar'
 if silipwn_machine_mode == 1
   Plug 'neoclide/coc.nvim', {'branch': 'release'} 
   Plug 'dense-analysis/ale'
@@ -306,7 +309,7 @@ map <leader>te :tabedit <C-r>=expand("%:p:h")<cr>/
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Pressing ,sc will toggle and untoggle spell checking
-map <leader>sc :setlocal spell!<cr>
+map <leader>sc :set spell!<cr>
 
 " Toggle paste mode on and off:
 map <leader>pp :setlocal paste!<cr>
@@ -373,6 +376,9 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 " Clear highlights
 map <leader>// :noh<CR>
+
+" Ctags toggler
+nmap <Leader>cc :TagbarToggle<CR>
 
 " No annoying sound on errors
 set noerrorbells
