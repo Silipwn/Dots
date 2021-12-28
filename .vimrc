@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2021-12-16T22:18:56-0500
+" Last-Modified     : 2021-12-28T12:51:41-0500
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
@@ -175,6 +175,7 @@ Plug 'scrooloose/syntastic'
 Plug 'Silipwn/vim-header'
 Plug 'mhartington/oceanic-next'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'sheerun/vim-polyglot'
 Plug 'axvr/org.vim', { 'for': 'org' }
 Plug 'tpope/vim-fugitive', { 'on': ['Git','Gdiffsplit'] }
@@ -282,16 +283,17 @@ noremap <SPACE> <Nop>
 let mapleader=" "
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+map <leader>bd :bd<cr>
 
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
+" Assuming will open only old files
+map <leader>tn :tabnew<cr>:History<cr>
 map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
+map <leader>td :tabclose<cr>gT
+map <leader>tm :tabmove
 map <leader>wh :wincmd h<CR>
 map <leader>wj :wincmd j<CR>
 map <leader>wk :wincmd k<CR>
