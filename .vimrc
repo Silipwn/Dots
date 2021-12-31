@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2021-12-28T12:51:41-0500
+" Last-Modified     : 2021-12-30T22:45:42-0500
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
@@ -290,7 +290,8 @@ map <leader>ba :bufdo bd<cr>
 
 " Useful mappings for managing tabs
 " Assuming will open only old files
-map <leader>tn :tabnew<cr>:History<cr>
+map <leader>th :tabnew<cr>:History<cr>
+map <leader>tn :tabnew<cr>:Files<cr>
 map <leader>to :tabonly<cr>
 map <leader>td :tabclose<cr>gT
 map <leader>tm :tabmove
