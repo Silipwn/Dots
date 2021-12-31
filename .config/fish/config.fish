@@ -2,10 +2,10 @@ set -g FORGIT_COPY_CMD 'xclip -selection clipboard'
 set -gx EDITOR vim
 if status is-interactive
     if not set -q TMUX
-        read -l -P 'Attach to tmux [Name/n/m]?' confirm
+        read -l -P 'Attach to tmux [Name/l/m] ?' confirm
         switch $confirm
-            case n N
-                echo "Alright, sorry man"
+            case l L
+                tmux attach-session -t (tmux list-sessions -F '#{session_name}' | fzf)
             case m main Main
                 tmux new-session -A -s main
             case '*'
