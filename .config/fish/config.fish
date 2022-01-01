@@ -1,7 +1,8 @@
 set -g FORGIT_COPY_CMD 'xclip -selection clipboard'
 set -gx EDITOR vim
 if status is-interactive
-    if not set -q TMUX
+   # https://www.markhansen.co.nz/auto-start-tmux/
+   if not set -q TMUX
         read -l -P 'Attach to tmux [Name/l/m] ?' confirm
         switch $confirm
             case l L
