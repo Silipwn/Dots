@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2021-12-30T22:45:42-0500
+" Last-Modified     : 2022-01-22T19:52:01-0500
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
@@ -11,6 +11,7 @@
 "   2021-09-07T23:26:09-0400 : Remove ranger, use nerdtree
 "   2021-11-27T10:12:45-0500: silipwn: Add additional packages and change theme
 "   Thu 16 Dec 2021 10:18:48 PM EST: silipwn: Adding ctags support
+"   Sat 22 Jan 2022 07:51:25 PM EST: silipwn: Perf improvemance, lazy loading
 
 " Set 'nocompatible' to ward off unexpected things that your distro might
 " have made, as well as sanely reset options when re-sourcing .vimrc
@@ -171,15 +172,15 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
 Plug 'Silipwn/vim-header'
 Plug 'mhartington/oceanic-next'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'axvr/org.vim', { 'for': 'org' }
 Plug 'tpope/vim-fugitive', { 'on': ['Git','Gdiffsplit'] }
-Plug 'preservim/nerdtree'
+Plug 'preservim/nerdtree', { 'on': ['NERDTreeFocus','NERDTree'] }
 Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -330,6 +331,10 @@ nmap <leader>w :w!<cr>
 map <leader>gg :Git<CR>
 map <leader>gd :Gdiffsplit<CR>
 map <leader>gb :Git blame<CR>
+map <leader>gp :Git push<CR>
+
+" Misc
+map <leader>hh :History<cr>
 
 " NerdTree
 map <leader>nf :NERDTreeFocus<CR>
@@ -338,8 +343,8 @@ map <leader>nt :NERDTreeToggle<CR>
 map <leader>ns :NERDTreeFind<CR>
 
 " Start NERDTree, unless a file or session is specified, eg. vim -S session_file.vim.
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists('s:std_in') && v:this_session == '' | NERDTree | endif
 
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
@@ -347,7 +352,7 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " 2021-11-10T07:39:39-0500: silipwn: Markdown folds
 au FileType markdown setlocal foldlevel=99
 
-let NERDTreeQuitOnOpen=3
+let NERDTreeQuitOnOpen=1
 
 " fzf.vim
 map <leader>ff :Files<cr>
