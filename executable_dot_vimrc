@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2022-01-22T19:52:01-0500
+" Last-Modified     : 2022-02-01T09:10:38-0500
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
@@ -174,7 +174,7 @@ Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
 Plug 'Silipwn/vim-header'
-Plug 'mhartington/oceanic-next'
+Plug 'crusoexia/vim-monokai'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 " Plug 'sheerun/vim-polyglot'
@@ -413,7 +413,7 @@ endif
 " Let's make things colorful
 set background=dark
 set termguicolors     " enable true colors support
-colorscheme OceanicNext
+colorscheme monokai
 
 " Notes
 map <leader>nn :Files $HOME/Dropbox/LogSeq/<CR>
