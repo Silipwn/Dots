@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2022-02-01T09:10:38-0500
+" Last-Modified     : 2022-04-06T08:03:01-0400
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
@@ -20,7 +20,7 @@ set nocompatible
 " Global variable with machine config
 " If standard install, then stick to 0
 " If have all dependecies like node and stuff, use 1
-let g:silipwn_machine_mode = 0
+let g:silipwn_machine_mode = 1
 
 syntax enable                  " Enable syntax highlighting.
 
@@ -172,7 +172,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-commentary'
 Plug 'itchyny/lightline.vim'
-Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
 Plug 'Silipwn/vim-header'
 Plug 'crusoexia/vim-monokai'
 Plug 'junegunn/fzf.vim'
@@ -191,6 +190,7 @@ Plug 'preservim/tagbar'
 if silipwn_machine_mode == 1
   Plug 'neoclide/coc.nvim', {'branch': 'release'} 
   Plug 'dense-analysis/ale'
+  Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
 endif
 
 call plug#end()
@@ -211,7 +211,7 @@ let g:header_field_author_email = 'contact at as-hw.in'
 let g:header_field_copyright = 'Finis coronat opus; Run at this code at your own peril ~ silipwn;' 
 let g:header_auto_add_header = 0
 let g:header_field_modified_by = 0
-let g:header_field_license_id = 'BSD-3-Clause'
+let g:header_field_license_id = 'BSD-3-Clause or GPL-3.0-or-later'
 let g:header_field_timestamp_format = '%FT%T%z'
 
 """ vim ALE stuff"""
@@ -414,9 +414,6 @@ endif
 set background=dark
 set termguicolors     " enable true colors support
 colorscheme monokai
-
-" Notes
-map <leader>nn :Files $HOME/Dropbox/LogSeq/<CR>
 
 " Italics support
 highlight Comment cterm=italic
