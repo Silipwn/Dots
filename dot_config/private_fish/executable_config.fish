@@ -8,7 +8,7 @@ set -g FORGIT_COPY_CMD 'xclip -selection clipboard'
 if status is-interactive
     # https://www.markhansen.co.nz/auto-start-tmux/
     if not set -q TMUX
-        read -l -P 'Attach to tmux [Name/l/m] ?' confirm
+        read -l -P 'Attach to tmux [Name/l/m] ? ' confirm
         switch $confirm
             case l L
                 # https://github.com/junegunn/fzf/issues/1693
