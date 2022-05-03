@@ -1,0 +1,119 @@
+#+LaTeX_HEADER: \usepackage{booktabs}
+
+# % to include pdf/eps/png files
+#+LaTeX_HEADER: \usepackage{graphicx}
+
+# % useful to add 'todo' markers
+#+LaTeX_HEADER: \usepackage{todonotes}
+
+# % hyperrefs
+#+LaTeX_HEADER: \usepackage{hyperref}
+
+# % ----------------- Code blocks ----------------
+# % nice source code formatting
+#+LaTeX_HEADER: \usepackage{minted}
+#+LaTeX_HEADER: \usepackage[utf8]{inputenc}
+
+#+LaTeX_HEADER: \usepackage{listings}
+#+LaTeX_HEADER: \usepackage{color}
+
+#+LaTeX_HEADER: \definecolor{codegreen}{rgb}{0,0.6,0}
+#+LaTeX_HEADER: \definecolor{codegray}{rgb}{0.5,0.5,0.5}
+#+LaTeX_HEADER: \definecolor{codepurple}{rgb}{0.58,0,0.82}
+#+LaTeX_HEADER: \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+
+#+LaTeX_HEADER: \lstdefinestyle{mystyle}{
+#+LaTeX_HEADER:     backgroundcolor=\color{backcolour},
+#+LaTeX_HEADER:     commentstyle=\color{codegreen},
+#+LaTeX_HEADER:     keywordstyle=\color{magenta},
+#+LaTeX_HEADER:     numberstyle=\tiny\color{codegray},
+#+LaTeX_HEADER:     stringstyle=\color{codepurple},
+#+LaTeX_HEADER:     basicstyle=\footnotesize,
+#+LaTeX_HEADER:     breakatwhitespace=false,
+#+LaTeX_HEADER:     breaklines=true,
+#+LaTeX_HEADER:     captionpos=b,
+#+LaTeX_HEADER:     keepspaces=true,
+#+LaTeX_HEADER:     numbers=left,
+#+LaTeX_HEADER:     numbersep=5pt,
+#+LaTeX_HEADER:     showspaces=false,
+#+LaTeX_HEADER:     showstringspaces=false,
+#+LaTeX_HEADER:     showtabs=false,
+#+LaTeX_HEADER:     tabsize=4
+#+LaTeX_HEADER: }
+
+#+LaTeX_HEADER: \lstset{style=mystyle}
+
+# For draft stuff?
+
+# % ----------------- Code blocks ----------------
+
+#+LaTeX_HEADER: \usepackage{background}
+#+LaTeX_HEADER: \backgroundsetup{
+#+LaTeX_HEADER:   position=current page.east,
+#+LaTeX_HEADER:   angle=-90,
+#+LaTeX_HEADER:   nodeanchor=east,
+#+LaTeX_HEADER:   vshift=-5mm,
+#+LaTeX_HEADER:   opacity=0.6,
+#+LaTeX_HEADER:   scale=1.0,
+#+LaTeX_HEADER:   contents= CONFIDENTIAL 
+#+LaTeX_HEADER: }
+
+# % change style of section headings
+#+LaTeX_HEADER: \usepackage{sectsty}
+#+LaTeX_HEADER: \allsectionsfont{\sffamily}
+
+# % only required for orgmode ticked TODO items, can remove
+#+LaTeX_HEADER: \usepackage{amssymb}
+
+# % only required for underlining text
+#+LaTeX_HEADER: \usepackage[normalem]{ulem}
+
+# % often use this in differential operators:
+#+LaTeX_HEADER: \renewcommand{\d}{\ensuremath{\mathrm{d}}}
+
+# % allow more reasonable text width for most documents than LaTeX default
+#+LaTeX_HEADER: \setlength{\textheight}{21cm}
+#+LaTeX_HEADER: \setlength{\textwidth}{16cm}
+
+# % reduce left and right margins accordingly
+#+LaTeX_HEADER: \setlength{\evensidemargin}{-0cm}
+#+LaTeX_HEADER: \setlength{\oddsidemargin}{-0cm}
+
+# % reduce top margin
+#+LaTeX_HEADER: \setlength{\topmargin}{0cm}
+
+# % Increase default line spacing a little if desired
+#+LaTeX_HEADER: \renewcommand{\baselinestretch}{1.2}
+
+# % tailored float handling
+#+LaTeX_HEADER: %\renewcommand{\topfraction}{0.8}
+#+LaTeX_HEADER: %\renewcommand{\bottomfraction}{0.6}
+#+LaTeX_HEADER: %\renewcommand{\textfraction}{0.2}
+
+# % Setting the font
+#+LaTeX_HEADER: \usepackage[T1]{fontenc}
+#+LaTeX_HEADER: \usepackage{mathpazo}
+#+LaTeX_HEADER: \linespread{1.05}
+#+LaTeX_HEADER: \usepackage[scaled]{helvet}
+#+LaTeX_HEADER: \usepackage{courier}
+
+#+LATEX_CLASS_OPTIONS: [a4paper, 11pt, colorlinks=true, citecolor=., linkcolor=black, urlcolor=black]
+
+# % Bibsupport
+#+LATEX_HEADER: \usepackage[square,numbers]{natbib}
+#+LATEX_HEADER: \bibliographystyle{dinat}
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
+#+OPTIONS: ^:{} 
+
+# For Custom Footer
+# Source: https://web.archive.org/web/20201009045525/https://ivanhanigan.github.io/2013/11/a-sharp-looking-orgmode-latex-export-header/
+#+LaTeX_HEADER: \usepackage{fancyhdr} %For headers and footers
+#+LaTeX_HEADER: \pagestyle{fancy} %For headers and footers
+# #+LaTeX_HEADER: \lhead{}
+# #+LaTeX_HEADER: \chead{}
+# #+LaTeX_HEADER: \rhead{\today}
+# #+LaTeX_HEADER: \rhead{\today} To add date
+# #+LaTeX_HEADER: \lfoot{Any form of transmission is prohibited.}
+# #+LaTeX_HEADER: \cfoot{}
+#+LaTeX_HEADER: \rfoot{\copyright \hspace{1mm} bi0s \the\year}
