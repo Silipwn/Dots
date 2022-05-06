@@ -83,8 +83,6 @@
 (use-package hypothesis :load-path "~/.doom.d/local")
 ;; Hypo stuff
 (setq hypothesis-username "silipwn")
-(setq hypothesis-token "6879-8Qz0JfrLIACUiOcdAW595v5r88eTaeTP7gDenzpyBjQ")
-(setq hypothesis-archive "~/Dropbox/Org-Mode/Org-Mode/SABS/Logs/hyp_manual.org")
 
 ;; Org-Journal
 ;; (setq org-journal-dir "~/Dropbox/Org-Mode/Org-Mode/SABS/Journal"
