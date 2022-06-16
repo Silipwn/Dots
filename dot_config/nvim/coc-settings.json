@@ -1,0 +1,71 @@
+{
+    // format on save
+    "coc.preferences.formatOnSaveFiletypes": [
+        "css",
+        "markdown",
+        "html",
+        "javascript",
+        "typescript",
+        "yaml",
+        "json",
+        "python",
+        "rust",
+        "ruby",
+        "go",
+        "cpp",
+        "cmake"
+    ],
+    "diagnostic.virtualText": true,
+    // coc-explorer
+    "explorer.width": 30,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.keyMappings.global": {
+        "<cr>": [
+            "expandable?",
+            "expand",
+            "open"
+        ],
+        "v": "open:vsplit"
+    },
+    // language servers
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": [
+                "go.mod",
+                ".vim/",
+                ".git/"
+            ],
+            "filetypes": [
+                "go"
+            ]
+        },
+        "bash": {
+            "command": "bash-language-server",
+            "args": [
+                "start"
+            ],
+            "filetypes": [
+                "sh",
+                "bash"
+            ],
+            "ignoredRootPaths": [
+                "~"
+            ]
+        }
+    },
+    // coc-rust-analyzer
+    "rust-analyzer.terminal.startinsert": true,
+    // codelens
+    "codeLens.enable": true,
+    // typescript
+    "tsserver.formatOnType": true,
+    // python
+    "python.jediEnabled": false,
+    // c++
+    "clangd.fallbackFlags": [
+        // "-std=c++17",
+        // "-xc++-header"
+    ]
+}
