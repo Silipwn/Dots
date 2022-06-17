@@ -50,3 +50,4 @@ function todo
 end
 end
 source ~/.asdf/asdf.fish
+set --universal pure_symbol_prompt '(⊙_⊙)'

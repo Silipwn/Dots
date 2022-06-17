@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2022-04-06T16:54:24-0400
+" Last-Modified     : 2022-06-17T09:34:25-0400
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
@@ -419,11 +419,11 @@ colorscheme gruvbox
 highlight Comment cterm=italic
 
 " Enables storing notes in a better way
-augroup QuickNotes
-    autocmd!
-    autocmd BufWinLeave *.md execute "mkview! " . expand('<afile>:p:h') . "/." . expand('<afile>:t') . ".view"
-    autocmd BufWinEnter *.md execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
-augroup END
+" augroup QuickNotes
+"     autocmd!
+"     autocmd BufWinLeave *.md execute "mkview! " . expand('<afile>:p:h') . "/." . expand('<afile>:t') . ".view"
+"     autocmd BufWinEnter *.md execute "silent! source " . expand('%:p:h') . "/." . expand('%:t') . ".view"
+" augroup END
 
 " Better diffing
 if has("patch-8.1.0360")
