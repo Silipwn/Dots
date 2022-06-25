@@ -1,9 +1,10 @@
 " install vim-plug if required
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
 call plug#begin()
 
 " Theme
@@ -60,7 +61,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " treesitter
 
 " Custom
 Plug 'Silipwn/vim-header' " Add headers everywhere
-Plug 'github/copilot.vim' " Why not!
+" Plug 'github/copilot.vim' " Why not!
 Plug 'ojroques/vim-oscyank', {'branch': 'main'} " OSC
 " Plug 'rust-lang/rust.vim' " Rust stuff
 Plug 'folke/todo-comments.nvim'
