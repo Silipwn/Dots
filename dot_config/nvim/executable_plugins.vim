@@ -65,5 +65,6 @@ Plug 'Silipwn/vim-header' " Add headers everywhere
 Plug 'ojroques/vim-oscyank', {'branch': 'main'} " OSC
 " Plug 'rust-lang/rust.vim' " Rust stuff
 Plug 'folke/todo-comments.nvim'
+Plug 'axvr/org.vim' " Add support for org files
 
 call plug#end()
