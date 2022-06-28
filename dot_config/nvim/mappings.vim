@@ -133,6 +133,7 @@ nnoremap <leader>yt :let @+=expand("%:t")<CR>
 
 " OSC Yank
 nnoremap <leader>yy :OSCYank<CR>
+vnoremap <leader>yy :OSCYank<CR>
 
 " close the split
 nnoremap <leader>sc :close<CR>
