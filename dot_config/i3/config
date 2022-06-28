@@ -73,8 +73,8 @@ bindsym XF86AudioPrev $exec playerctl previous
 bindsym $mod+m $exec playerctl play-pause
 bindsym $mod+greater $exec playerctl next
 bindsym $mod+less $exec playerctl previous
-bindsym $mod+bracketleft $exec /usr/bin/pulseaudio-ctl down
-bindsym $mod+bracketright $exec /usr/bin/pulseaudio-ctl up
+bindsym $mod+bracketleft $exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+bracketright $exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 
 
 # Emacs Keybindings
@@ -127,7 +127,7 @@ bindsym $mod+a exec rofi -show window -show-icons
 # Buku scripts
 bindsym $mod+b exec /home/silipwn/Developments/Scripts/buku_xsel
 bindsym $mod+Shift+b exec /home/silipwn/Developments/Scripts/buku-rofi.sh
-bindsym $mod+g exec /home/silipwn/Developments/Scripts/buku-rofi/buku-rofi
+# bindsym $mod+g exec /home/silipwn/Developments/Scripts/buku-rofi/buku-rofi
 
 # Search via Surf :)
 bindsym $mod+q $exec --no-startup-id /home/silipwn/Developments/Scripts/surf.sh -b qutebrowser 
@@ -148,10 +148,10 @@ bindsym $mod+Print $exec /home/silipwn/Developments/Scripts/scr-print.sh
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -172,7 +172,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+g split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -320,8 +320,8 @@ bar {
        modifier None
        font pango:FiraCode 10
        tray_output none
-       output eDP-1
-       position top
+       # output eDP-1
+       # position top
        # output HDMI-1
        colors {
               separator #666666
@@ -344,7 +344,7 @@ bar {
         modifier None
         font pango:FiraCode 10
         position top
-        output HDMI-1
+        # output HDMI-1
         colors {
               separator #666666
               background #00000000
@@ -401,7 +401,9 @@ workspace "7" output HDMI-1
 workspace "8" output HDMI-1
 workspace "10" output primary
 # Windows assignment
-for_window [class="^.*"] border pixel 2
+# for_window [class="^.*"] border pixel 2
+# Pixel less :)
+for_window [class="^.*"] border pixel 0
 # assign [class="^mpv$"] 8
 # assign [class="^research"] 1
 # assign [class="^default"] 2
