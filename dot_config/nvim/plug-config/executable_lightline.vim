@@ -1,5 +1,5 @@
 let g:lightline = {
-      \ 'colorscheme': 'everforest',
+      \ 'colorscheme': 'atlas',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'absolutepath', 'modified', 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status' ]]

@@ -44,6 +44,7 @@ set scrollback=100000                   " integrated terminal scrollback
 set scrolloff=3                         " start scrolling 3 lines before edge of the viewport (@ greg hurrell)
 set noswapfile                          " disable swap files
 set lazyredraw                          " disable redrawing when changing text
+set modeline                            " because I'm paranoid
 
 " Proper search
 set incsearch
@@ -65,8 +66,9 @@ endif
 " call Base16hi("Comment", g:base16_gui09, "", g:base16_cterm09, "", "", "")
 
 " everforest theme >>
-let g:everforest_background = 'hard'
-colorscheme everforest
+" let g:everforest_background = 'hard'
+colorscheme atlas
+" colorscheme everforest
 
 " trim trailing whitespace on save
 autocmd FileType c,cpp,java,go,php,python,vim,yaml,rust autocmd BufWritePre <buffer> %s/\s\+$//e

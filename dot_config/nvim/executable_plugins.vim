@@ -10,7 +10,9 @@ call plug#begin()
 " Theme
 " Plug 'gruvbox-community/gruvbox'
 " Plug 'chriskempson/base16-vim'
-Plug 'sainnhe/everforest'
+" Plug 'sainnhe/everforest'
+Plug 'huyvohcmc/atlas.vim'
+
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -35,8 +37,8 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}     " coc
 " Programming Languages
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }  " Go
 " Plug 'jez/vim-better-sml'                           " SML
-Plug 'cespare/vim-toml'                             " TOML
-Plug 'pangloss/vim-javascript'                      " JavaScript support
+" Plug 'cespare/vim-toml'                             " TOML
+" Plug 'pangloss/vim-javascript'                      " JavaScript support
 " Plug 'leafgarland/typescript-vim'                   " TypeScript syntax
 Plug 'preservim/tagbar'                             " tagbar
 " Plug 'simrat39/symbols-outline.nvim'                " No tag bar on LSP bar
@@ -53,7 +55,7 @@ Plug 'tpope/vim-commentary'         " commenting
 Plug 'tpope/vim-surround'           " surround with brackets (like VSCode)
 Plug 'andymass/vim-matchup'         " Matching brackets
 Plug 'jiangmiao/auto-pairs'         " Auto pairs for '(' '[' '{'
-Plug 'liuchengxu/vim-which-key'     " Vim-Which-Key
+" Plug 'liuchengxu/vim-which-key'     " Vim-Which-Key
 Plug 'michaeljsmith/vim-indent-object'  " additional indent objects
 Plug 'tpope/vim-obsession'          " Saving and restoring sessions
 " Plug 'dbeniamine/todo.txt-vim'      " todo.txt
@@ -66,5 +68,6 @@ Plug 'ojroques/vim-oscyank', {'branch': 'main'} " OSC
 " Plug 'rust-lang/rust.vim' " Rust stuff
 Plug 'folke/todo-comments.nvim'
 Plug 'axvr/org.vim' " Add support for org files
+Plug 'lambdalisue/fern.vim' " Need to see files
 
 call plug#end()
