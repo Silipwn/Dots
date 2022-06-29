@@ -67,8 +67,9 @@ endif
 
 " everforest theme >>
 " let g:everforest_background = 'hard'
-colorscheme atlas
-" colorscheme everforest
+let g:onedark_terminal_italics = 1
+let g:onedark_hide_endofbuffer = 1
+colorscheme onedark
 
 " trim trailing whitespace on save
 autocmd FileType c,cpp,java,go,php,python,vim,yaml,rust autocmd BufWritePre <buffer> %s/\s\+$//e

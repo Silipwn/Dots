@@ -11,7 +11,7 @@ call plug#begin()
 " Plug 'gruvbox-community/gruvbox'
 " Plug 'chriskempson/base16-vim'
 " Plug 'sainnhe/everforest'
-Plug 'huyvohcmc/atlas.vim'
+Plug 'joshdick/onedark.vim'
 
 
 " Lightline
