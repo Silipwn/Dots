@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2022-06-29T16:43:39-0400
+" Last-Modified     : 2022-06-29T16:47:43-0400
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
@@ -20,7 +20,7 @@ set nocompatible
 " Global variable with machine config
 " If standard install, then stick to 0
 " If have all dependecies like node and stuff, use 1
-let g:silipwn_machine_mode = 1
+let g:silipwn_machine_mode = 0 
 
 syntax enable                  " Enable syntax highlighting.
 
