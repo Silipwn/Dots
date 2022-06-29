@@ -8,6 +8,7 @@ source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/lightline.vim
 source $HOME/.config/nvim/plug-config/rooter.vim
 source $HOME/.config/nvim/plug-config/signify.vim
+source $HOME/.config/nvim/plug-config/fern.vim
 " source $HOME/.config/nvim/plug-config/which-key.vim
 " source $HOME/.config/nvim/plug-config/vim-go.vim
 " source $HOME/.config/nvim/plug-config/vim-better-sml.vim
@@ -21,3 +22,4 @@ source $HOME/.config/nvim/plug-config/fzf.vim
 source $HOME/.config/nvim/plug-config/todotxt.vim
 source $HOME/.config/nvim/plug-config/treesitter.vim
 source $HOME/.config/nvim/plug-config/todo.vim
+source $HOME/.config/nvim/plug-config/telescope.vim

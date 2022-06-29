@@ -70,4 +70,8 @@ Plug 'folke/todo-comments.nvim'
 Plug 'axvr/org.vim' " Add support for org files
 Plug 'lambdalisue/fern.vim' " Need to see files
 
+" Telescope stuff
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
 call plug#end()

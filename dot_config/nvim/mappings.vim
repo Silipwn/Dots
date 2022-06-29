@@ -24,7 +24,7 @@ nnoremap <C-l>    :vertical resize +2<CR>
 " X clipboard integration
 " <Space>c will copy entire buffer into clipboard
 " <Space>p will paste clipboard into buffer
-noremap <leader>c :w !xsel -ib<CR><CR>
+" noremap <leader>c :w !xsel -ib<CR><CR>
 noremap <leader>p :read !xsel --clipboard --output<CR>
 
 " No arrow keys --- force yourself to use the home row
