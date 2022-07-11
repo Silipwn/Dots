@@ -33,6 +33,7 @@ Plug 'shumphrey/fugitive-gitlab.vim'    " Vim-Rhubarb for Gitlab
 
 " Language Completion (LSP)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}     " coc
+Plug 'honza/vim-snippets'                           " snippets
 
 " Programming Languages
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }  " Go
@@ -63,7 +64,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " treesitter
 
 " Custom
 Plug 'Silipwn/vim-header' " Add headers everywhere
-" Plug 'github/copilot.vim' " Why not!
+Plug 'github/copilot.vim' " Why not!
 Plug 'ojroques/vim-oscyank', {'branch': 'main'} " OSC
 " Plug 'rust-lang/rust.vim' " Rust stuff
 Plug 'folke/todo-comments.nvim'
