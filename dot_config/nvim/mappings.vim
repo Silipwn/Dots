@@ -100,7 +100,7 @@ vnoremap ;q :q<CR>
 " vnoremap ;w :w<CR>
 
 " tagbar (miguel grinberg: https://gist.github.com/miguelgrinberg/527bb5a400791f89b3c4da4bd61222e4)
-map <leader>t :TagbarToggle<CR>
+map <leader>to :TagbarToggle<CR>
 
 " vsplit
 noremap <leader>v :vsplit<CR>
@@ -154,4 +154,4 @@ tnoremap <C-w>k <C-\><C-n><C-w>k
 tnoremap <C-w>l <C-\><C-n><C-w>l
 
 " Fern support
-nnoremap <leader>e :Fern . -drawer -toggle<CR>
+nnoremap <leader>nf :Fern . -drawer -toggle<CR>

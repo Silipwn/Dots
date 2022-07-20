@@ -25,3 +25,16 @@ command! -bang -nargs=* Rgh
   \ call fzf#vim#grep(
   \   'rg --hidden --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
+
+
+nnoremap <leader>ff :Files<cr>
+vnoremap <leader>ff :Files<cr>
+
+nnoremap <leader>fr :History<cr>
+vnoremap <leader>fr :History<cr>
+
+nnoremap <leader>sb :BLines<cr>
+vnoremap <leader>sb :BLines<cr>
+
+nnoremap <leader>sd :Rg<cr>
+vnoremap <leader>sd :Rg<cr>
