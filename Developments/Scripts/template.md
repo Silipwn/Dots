@@ -15,3 +15,4 @@ abstract: |
 1. Test
 2. Wow
 > bash script.sh
+> pandoc -t pdf -H pandoc_header.tex -o pan.pdf template.md
