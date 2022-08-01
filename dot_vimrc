@@ -3,7 +3,7 @@
 " License           : BSD-3-Clause
 " Author            : silipwn <(contact at as-hw.in)>
 " Date              : 2019-09-24T00:00:00+0530
-" Last-Modified     : 2022-07-24T16:01:09-0400
+" Last-Modified     : 2022-08-01T16:18:02-0400
 " Changelog :
 "   Mon Jul 19 05:40:38 PM IST 2021 : Add support for misc things
 "   Tue Jul 20 06:16:24 PM IST 2021 : Add ALE/COC ; Disabled by default ;)
@@ -436,3 +436,6 @@ endif
 
 " Enable yanking from remote terminals
 vnoremap <leader>yy :OSCYank<CR>
+
+" Add fix for tmux new verion with OSCYank
+let g:oscyank_term = 'default'
