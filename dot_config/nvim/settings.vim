@@ -173,3 +173,6 @@ let g:tagbar_type_rust = {
       \ 'P': 'method',
   \ },
 \ }
+
+" Add fix for OSCYank
+let g:oscyank_term = 'default'
