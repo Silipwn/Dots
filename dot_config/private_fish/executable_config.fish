@@ -4,7 +4,7 @@ set PATH /home/silipwn/Code/code-ql/codeql /usr/local/sbin /usr/local/bin /usr/b
 set -gx GOPATH /home/silipwn/Developments/TChains/Go
 set -g QT_QPA_PLATFORMTHEME qt5ct
 set -g FORGIT_COPY_CMD 'xclip -selection clipboard'
-# set -gx EDITOR nvim
+set -gx EDITOR vim
 if status is-interactive
     # https://www.markhansen.co.nz/auto-start-tmux/
     if not set -q TMUX
