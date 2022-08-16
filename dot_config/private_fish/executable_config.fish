@@ -1,13 +1,14 @@
 # cat ~/.cache/wal/sequences
-set PATH /home/silipwn/Code/code-ql/codeql /usr/local/sbin /usr/local/bin /usr/bin /usr/bin/site_perl /usr/bin/vendor_perl /usr/bin/core_perl /home/silipwn/Developments/TChains/Go/bin /home/silipwn/.cargo/bin /home/silipwn/.local/bin /home/silipwn/Developments/Scripts /home/silipwn/.emacs.d/bin 
+# set PATH /home/silipwn/Code/code-ql/codeql /usr/local/sbin /usr/local/bin /usr/bin /usr/bin/site_perl /usr/bin/vendor_perl /usr/bin/core_perl /home/silipwn/Developments/TChains/Go/bin /home/silipwn/.cargo/bin /home/silipwn/.local/bin /home/silipwn/Developments/Scripts /home/silipwn/.emacs.d/bin 
 # starship init fish | source
-set -gx GOPATH /home/silipwn/Developments/TChains/Go
+# set -gx GOPATH /home/silipwn/Developments/TChains/Go
 set -g QT_QPA_PLATFORMTHEME qt5ct
 set -g FORGIT_COPY_CMD 'xclip -selection clipboard'
-set -gx EDITOR vim
+# set -gx EDITOR nvim
 if status is-interactive
     # https://www.markhansen.co.nz/auto-start-tmux/
-    if not set -q TMUX
+    if begin; not set -q TMUX; and not set -q TERM_PROGRAM; end;
+    # if begin false; or true; end
         read -l -P 'Attach to tmux [Name/l/m] ? ' confirm
         switch $confirm
             case l L
