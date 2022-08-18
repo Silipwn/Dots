@@ -211,7 +211,10 @@ bindsym $mod+Shift+d focus child
 bindsym $mod+Shift+Escape move scratchpad
 
 # Show the first scratchpad window
-bindsym $mod+Escape scratchpad show
+bindsym $mod+Escape [class="kitty"] scratchpad show; move position center
+
+# MPV only 
+bindsym $mod+p [class="mpv"] scratchpad show; move position center
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -324,7 +327,7 @@ bindsym $mod+Shift+l exec /home/silipwn/Developments/Scripts/lock.sh
 bar {
        mode hide
        modifier None
-       font pango:FiraCode 10
+       font pango:FiraCode 12
        tray_output none
        # output eDP-1
        # position top
@@ -348,7 +351,7 @@ bar {
 bar {
         mode hide
         modifier None
-        font pango:FiraCode 10
+        font pango:FiraCode 12
         position top
         # output HDMI-1
         colors {
@@ -415,9 +418,8 @@ for_window [class="^.*"] border pixel 0
 # assign [class="^default"] 2
 # assign [class="^Emacs"] 3:
 assign [class="^discord"] 7:
-# for_window [class="^mpv$"] focus
 # no_focus [class="^mpv$"]
-# for_window [class="^mpv$"] floating enable, resize set 640 480;
+for_window [class="^mpv$"] move scratchpad; resize set 640 480;
 # Thu Jun 17 09:54:33 2021 Removing this since it messes up the below config
 # ; resize set 480 480
 # for_window [class="^mpv$"] move right 450px, move down 250px
@@ -451,7 +453,6 @@ exec playerctld daemon
 exec optimus-manager-qt
 # exec redshift
 # exec emacsclient -n -c --frame-parameters "((name . \"_emacs scratchpad_\"))"
-
 # Auto switcher
 # exec_always prime-offload
 # SystemD Stuff
