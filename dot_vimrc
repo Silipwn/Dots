@@ -3,11 +3,10 @@
 " Finis coronat opus; Run at this code at your own peril ~ silipwn;
 " File                   : .vimrc
 " Author                 : silipwn <contact at as-hw.in>
-" Description            : This file is responsible for <insert task>
+" Description            : A (not so) minimal vimrc. Idea is to keep it <= 150 lines only
 " Date                   : 2022-10-26T21:41:46-0400
-" Last-Modified          : 2022-10-26T23:42:53-0400
+" Last-Modified          : 2023-02-27T17:51:26-0500
 " Last Modified By       : silipwn <contact at as-hw.in>
-" A (not so) minimal vimrc. Idea is to keep it <= 150 lines only
 set nocompatible
 
 filetype plugin indent on  " Load plugins according to detected filetype.
@@ -43,6 +42,7 @@ set synmaxcol   =200       " Only highlight the first 200 columns.
 
 set list                   " Show non-printable characters.
 set number                 " Should be a default setting, heh!
+
 if has('multi_byte') && &encoding ==# 'utf-8'
   let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 else
@@ -95,14 +95,13 @@ endfunction
 
 "" 2021-06-18T05:55:11+0000 : Added macro for adding time : silipwn
 iab cmtime <c-r>=strftime("%FT%T%z: silipwn: <why>")<cr>
+iab time <c-r>=strftime("%FT%T%z")<cr>
 
 " Plugin shenanigans 
-set runtimepath^=$HOME/.vim/plugins/
 set runtimepath^=$HOME/.vim/plugins/
 source $HOME/.vim/plugins/vim-oscyank/plugin/oscyank.vim 
 source $HOME/.vim/plugins/vim-header/autoload/header.vim 
 source $HOME/.vim/plugins/vim-header/plugin/header.vim
-
 vnoremap <leader>y :OSCYank<CR>
 
 " Config
@@ -113,3 +112,6 @@ let g:header_auto_add_header = 0
 let g:header_field_license_id = 'BSD-3-Clause or GPL-3.0-or-later'
 let g:header_field_timestamp_format = '%FT%T%z'
 let g:header_spdx_text = "silipwn (Ashwin)"
+" If tmux yank doesn't work, it's probably cause you don't have latest tmux
+" https://github.com/ojroques/vim-oscyank/issues/26
+let g:oscyank_term = 'default' 
