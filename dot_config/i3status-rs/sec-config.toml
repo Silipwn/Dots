@@ -1,0 +1,53 @@
+[theme]
+theme = "semi-native"
+
+[icons]
+icons = "awesome5"
+
+[[block]]
+block = "notify"
+
+[[block]]
+block = "music"
+format = " $icon {$combo.str(max_w:35,rot_interval:0.5) $play $next |}"
+
+[[block]]
+block = "weather"
+format = " $icon $weather ($location) $temp, $wind m/s $direction "
+# format = "{weather} ({location}) {temp}C 💧{humidity}%  , {wind} m/s {direction}"
+
+[block.service]
+name = "openweathermap"
+api_key = "785cbb458266f0a0913f6df93491261e"
+city_id = "4928096"
+units = "metric"
+# service = { name = "openweathermap", api_key = "785cbb458266f0a0913f6df93491261e", city_id = "4928096", units = "metric" }
+
+# [[block]]
+# block = "custom"
+# command = ''' emacsclient -e "(i3-org-clock-indicator)" || echo "Emacs open?" '''
+# interval = 120
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "sound"
+device_kind = "source"
+
+[[block]]
+block = "pacman"
+interval = 600
+error_interval = 300
+format = " $icon $pacman + $aur = $both updates available "
+format_singular = " $icon $both update available "
+format_up_to_date = " $icon system up to date "
+critical_updates_regex = "(linux|linux-lts|linux-zen)"
+# aur_command should output available updates to stdout (ie behave as echo -ne "update\n")
+aur_command = "yay -Qua"
+
+[[block]]
+block = "focused_window"
+[block.format]
+full = " $title.str(max_w:25) |"
+short = " $title.str(max_w:15) |"
