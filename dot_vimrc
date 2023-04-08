@@ -5,7 +5,7 @@
 " Author                 : silipwn <contact at as-hw.in>
 " Description            : A (not so) minimal vimrc. Idea is to keep it <= 150 lines only
 " Date                   : 2022-10-26T21:41:46-0400
-" Last-Modified          : 2023-02-27T17:51:26-0500
+" Last-Modified          : 2023-04-08T08:55:01-0400
 " Last Modified By       : silipwn <contact at as-hw.in>
 set nocompatible
 
@@ -102,7 +102,7 @@ set runtimepath^=$HOME/.vim/plugins/
 source $HOME/.vim/plugins/vim-oscyank/plugin/oscyank.vim 
 source $HOME/.vim/plugins/vim-header/autoload/header.vim 
 source $HOME/.vim/plugins/vim-header/plugin/header.vim
-vnoremap <leader>y :OSCYank<CR>
+vnoremap <leader>y :OSCYankVisual<CR>
 
 " Config
 let g:header_field_author = 'silipwn'
