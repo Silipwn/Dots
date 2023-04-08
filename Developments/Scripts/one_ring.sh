@@ -6,7 +6,7 @@
 # Author                 : silipwn <contact at as-hw.in>
 # Description            : One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. 
 # Date                   : 2022-04-11T11:59:22-0400
-# Last-Modified          : 2022-11-01T14:10:18-0400
+# Last-Modified          : 2022-11-03T17:31:44-0400
 # Idea for now is to have a bash script with some stuff to do things
 set -eo pipefail
 
@@ -21,18 +21,6 @@ if ! [ $(id -u) = 0 ]; then
    exit 1
 fi
 
-# Bash function to get the release based on the string provided
-function get_deb () {
-URL_PRE=https://api.github.com/repos/
-URL_POST=/releases/latest
-URL=$URL_PRE$1$URL_POST
-curl -s $URL \
-          | grep "browser_download_url.*amd64.*deb" \
-          | cut -d : -f 2,3 \
-          | tr -d \" \
-          | wget -qi -
-
-}
 # List of packages to install
 # This is a list of packages to install on any *nix system
 # Terminal
@@ -41,10 +29,12 @@ curl -s $URL \
 # - vim
 # - ssh 
 # - htop
-sudo apt-get -y update
-sudo apt-get install -y git tmux vim openssh-server curl build-essentials software-properties-common jq htop wget
+sudo -u root apt-get -y update
+sudo -u root apt-get install -y git tmux vim openssh-server curl build-essential software-properties-common jq htop wget curl
 # Python
-sudo apt-get install -y python3-pip python3-dev python3-setuptools
+sudo -u root apt-get install -y python3-pip python3-dev python3-setuptools
+# Install rust
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 # - fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 # - fd
@@ -52,12 +42,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 # - bat
 # - delta
 # - dust
-get_deb(sharkdp/fd)
-get_deb(dandavison/delta)
-get_deb(sharkdp/bat)
-get_deb(bootandy/dust)
-sudo dpkg -i *.deb
-rm *.deb
 # - exa
 sudo apt-get install -y exa
 # https://jvns.ca/blog/2022/04/12/a-list-of-new-ish--command-line-tools/

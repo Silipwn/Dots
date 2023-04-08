@@ -6,10 +6,11 @@
 # Description           : This is for syncing files from a development machine to hw
 #                       : Depends upon rsync + inotifywait
 # Date                  : 2022-03-21T10:52:09-0400
-# Last-Modified         : 2022-12-27T12:50:19-0500
+# Last-Modified         : 2022-12-27T12:57:53-0500
 
 if [[ $# -lt 2 ]] ; then
-    echo 'usage <script> <src> <dest> ; Full path only; Check script for more details.'
+    echo 'usage <script> <src> <dest> ; Full path only; An example:'
+    echo 'sync.sh cs500/assignments/assignment1/srcs/ aws-networks-vm:/home/ubuntu/assignment1'
     exit 1
 fi
 
