@@ -6,7 +6,7 @@
 # Author                 : silipwn <contact at as-hw.in>
 # Description            : One Ring to rule them all, One Ring to find them, One Ring to bring them all and in the darkness bind them. 
 # Date                   : 2022-04-11T11:59:22-0400
-# Last-Modified          : 2022-11-03T17:31:44-0400
+# Last Modified          : 2023-04-16T21:11:43-0400
 # Idea for now is to have a bash script with some stuff to do things
 set -eo pipefail
 
@@ -61,6 +61,7 @@ mkdir -p $HOME/.vim/files/backup/ $HOME/.vim/files/swap/ $HOME/.vim/files/undo/ 
 # Git clone
 git clone https://github.com/ojroques/vim-oscyank $HOME/.vim/plugins/vim-oscyank
 git clone https://github.com/Silipwn/vim-header $HOME/.vim/plugins/vim-header
+git clone https://tpope.io/vim/commentary.git $HOME/.vim/plugins/vim-commentary
 # Let's get the dots
 # Vim config
 wget https://raw.githubusercontent.com/Silipwn/Dots/chezmoi/dot_vimrc -O $HOME/.vimrc
