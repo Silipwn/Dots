@@ -5,7 +5,7 @@
 " Author                 : silipwn <contact at as-hw.in>
 " Description            : A (not so) minimal vimrc. Idea is to keep it <= 150 lines only
 " Date                   : 2022-10-26T21:41:46-0400
-" Last-Modified          : 2023-04-16T21:12:07-0400
+" Last-Modified          : 2023-05-07T12:36:06-0400
 " Last Modified By       : silipwn <contact at as-hw.in>
 set nocompatible
 
@@ -96,6 +96,8 @@ endfunction
 "" 2021-06-18T05:55:11+0000 : Added macro for adding time : silipwn
 iab cmtime <c-r>=strftime("%FT%T%z: silipwn: <why>")<cr>
 iab time <c-r>=strftime("%FT%T%z")<cr>
+iab date <c-r>=strftime("%d/%m/%Y")<cr>
+iab time <c-r>=strftime("%H%M")<cr>
 
 " Plugin shenanigans 
 set runtimepath^=$HOME/.vim/plugins/
