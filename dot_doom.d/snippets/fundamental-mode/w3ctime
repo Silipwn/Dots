@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: w3ctime
-# key: w3ctime
-# --
-`(format-time-string "%FT%T%z: silipwn: why")`
