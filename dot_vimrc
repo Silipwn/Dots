@@ -5,7 +5,7 @@
 " Author                 : silipwn <contact at as-hw.in>
 " Description            : A (not so) minimal vimrc. Idea is to keep it <= 150 lines only
 " Date                   : 2022-10-26T21:41:46-0400
-" Last-Modified          : 2023-05-24T17:07:29-0400
+" Last-Modified          : 2023-10-03T14:16:01-0400
 " Last Modified By       : silipwn <contact at as-hw.in>
 set nocompatible
 
@@ -99,12 +99,22 @@ iab cmtime <c-r>=strftime("%FT%T%z: silipwn: <why>")<cr>
 iab notetime <C-R>=strftime("* @ %Y-%m-%d %H:%M:%S")<CR>
 iab todotime <C-R>=strftime("* @ %Y-%m-%d %H:%M:%S TODO *")<CR>
 
-" Plugin shenanigans 
-set runtimepath^=$HOME/.vim/plugins/
-source $HOME/.vim/plugins/vim-oscyank/plugin/oscyank.vim 
-source $HOME/.vim/plugins/vim-header/autoload/header.vim 
-source $HOME/.vim/plugins/vim-header/plugin/header.vim
-source $HOME/.vim/plugins/vim-commentary/plugin/commentary.vim
+call plug#begin()
+
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+Plug 'https://github.com/ojroques/vim-oscyank' "Yank anything anywhere
+Plug 'https://github.com/Silipwn/vim-header' "Custom headers 
+Plug 'junegunn/fzf.vim' "FZF
+Plug 'https://github.com/tpope/vim-commentary' "gcc everything
+
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
+
+" Keybinds
 vnoremap <leader>y :OSCYankVisual<CR>
 
 " Config
@@ -118,3 +128,8 @@ let g:header_spdx_text = "silipwn (Ashwin)"
 " If tmux yank doesn't work, it's probably cause you don't have latest tmux
 " https://github.com/ojroques/vim-oscyank/issues/26
 let g:oscyank_term = 'default' 
+
+" Spellcheck
+autocmd FileType markdown setlocal spell
+autocmd FileType gitcommit setlocal spell
+set spellfile=$HOME/Dropbox/plain-text/en.utf-8.add
