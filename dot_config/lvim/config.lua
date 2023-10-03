@@ -7,6 +7,7 @@ lvim.format_on_save.enabled = false
 lvim.colorscheme = "zenbones"
 
 vim.opt.autoread = true
+vim.opt.spellfile = "$HOME/Dropbox/plain-text/en.utf-8.add"
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
   command = "if mode() != 'c' | checktime | endif",
   pattern = { "*" },
