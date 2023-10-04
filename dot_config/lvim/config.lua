@@ -1,13 +1,12 @@
 -- Read the docs: https://www.lunarvim.org/docs/configuration
 -- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
--- Discord: https://discord.com/invite/Xb9B4Ny
 -- Forum: https://www.reddit.com/r/lunarvim/
+-- Discord: https://discord.com/invite/Xb9B4Ny
 lvim.log.level = "info"
 lvim.format_on_save.enabled = false
 lvim.colorscheme = "zenbones"
 
 vim.opt.autoread = true
-vim.opt.spellfile = "$HOME/Dropbox/plain-text/en.utf-8.add"
 vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
   command = "if mode() != 'c' | checktime | endif",
   pattern = { "*" },
@@ -34,10 +33,6 @@ lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q
 
 
 -- Adding custom keymaps
--- OSCyank
-vim.keymap.set('n', '<leader>y', require('osc52').copy_operator, {expr = true})
-vim.keymap.set('n', '<leader>yy', '<leader>c_', {remap = true})
-vim.keymap.set('v', '<leader>y', require('osc52').copy_visual)
 
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
@@ -64,12 +59,15 @@ lvim.plugins = {
     {
     "ojroques/nvim-osc52",
     config = function()
-      require('osc52').setup {
-        max_length = 0,      -- Maximum length of selection (0 for no limit)
-        silent     = false,  -- Disable message on successful copy
-        trim       = false,  -- Trim surrounding whitespaces before copy
-      }
-    end
+      require("osc52").setup()
+      local function copy()
+        if vim.v.event.operator == "y" and vim.v.event.regname == "" then
+          require("osc52").copy_register '"'
+        end
+      end
+
+      vim.api.nvim_create_autocmd("TextYankPost", { callback = copy })
+    end,
     },
     {
     "folke/todo-comments.nvim",
