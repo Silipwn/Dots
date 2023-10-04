@@ -1,0 +1,6 @@
+[".local/custom/templates/Eisvogel"]
+    type = "git-repo"
+    url = "https://github.com/Wandmalfarbe/pandoc-latex-template.git"
+    refreshPeriod = "168h"
+    [".local/custom/templates/Eisvogel".pull]
+        args = ["--ff-only"]
