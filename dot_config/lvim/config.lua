@@ -38,6 +38,7 @@ lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q
 vim.keymap.set('n', '<leader>y', require('osc52').copy_operator, {expr = true})
 vim.keymap.set('n', '<leader>yy', '<leader>c_', {remap = true})
 vim.keymap.set('v', '<leader>y', require('osc52').copy_visual)
+vim.api.nvim_set_keymap('n', 'gf', ':e <cfile><cr>', { noremap = true })
 
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 
@@ -70,6 +71,11 @@ lvim.plugins = {
         trim       = false,  -- Trim surrounding whitespaces before copy
       }
     end
+    },
+    {
+    'kaarmu/typst.vim',
+    ft = 'typst',
+    lazy = false,
     },
     {
     "folke/todo-comments.nvim",
@@ -179,7 +185,8 @@ vim.g.zenbones_compat = 1
 -- 2023-04-15T18:14:07-0400: silipwn: Now can add fancy comments
 vim.cmd [[iab cmtime <c-r>=strftime("%FT%T%z: silipwn:")<cr>]]
 vim.cmd [[iab isotime <c-r>=strftime("%FT%T%z")<cr>]]
-vim.cmd [[iab notetime <c-r>=strftime("%d-%m-%Y %H:%M:%S:")<cr>]]
+vim.cmd [[iab notetime <c-r>=strftime("%H%M")<cr>]]
+
 -- Can not be placed into the config method of the plugins.
 lvim.builtin.cmp.formatting.source_names["copilot"] = "(Copilot)"
 table.insert(lvim.builtin.cmp.sources, 1, { name = "copilot" })
