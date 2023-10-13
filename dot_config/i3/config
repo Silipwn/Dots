@@ -89,7 +89,8 @@ bindsym $mod+bracketright $exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 
 # Mpv Spawn
 # bindsym $mod+Shift+m $exec /home/silipwn/Developments/Scripts/mpv-spawn.sh
-bindsym $mod+Shift+m $exec /home/silipwn/.local/bin/mpv-spawn.sh
+bindsym $mod+Shift+m $exec /home/silipwn/.local/custom/bin/mpv-spawn.sh
+
 # MPD keybindings
 # bindsym shift+XF86AudioPause exec mpc toggle
 # bindsym shift+XF86AudioNext exec mpc next
@@ -142,6 +143,7 @@ bindsym $mod+o $exec --no-startup-id /home/silipwn/Developments/Scripts/his-surf
 # bindsym $mod+Shift+Print $exec flameshot gui
 # 2021-10-31T10:11:59-0400: silipwn: Ensuring same shortcit on mac and Linnux
 bindsym $mod+s $exec flameshot gui
+bindsym $mod+Shift+o $exec /home/silipwn/.local/custom/bin/ocr-flameshot.sh
 # /home/silipwn/Developments/Scripts/scr-print-sel.sh
 bindsym $mod+Print $exec /home/silipwn/Developments/Scripts/scr-print.sh
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -453,29 +455,4 @@ gaps outer 3
 # SystemD Stuff
 # exec systemctl --user start mbsync.timer
 # exec systemctl --user start mpd-mpris.service
-# exec systemctl --user start log-org.timer
 # exec dclock -bg black -fg lavender -led_off gray22 -miltime
-
-# Plasma 
-for_window [title="Desktop — Plasma"] kill, floating enable, border none
-for_window [class="plasmashell"] floating enable
-for_window [class="Plasma"] floating enable, border none
-for_window [title="plasma-desktop"] floating enable, border none
-for_window [title="win7"] floating enable, border none
-for_window [class="krunner"] floating enable, border none
-for_window [class="Kmix"] floating enable, border none
-for_window [class="Klipper"] floating enable, border none
-for_window [class="Plasmoidviewer"] floating enable, border none
-for_window [class="(?i)*nextcloud*"] floating disable
-for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
-no_focus [class="plasmashell" window_type="notification"] 
-
-# >>> Avoid tiling for non-Plasma stuff <<<
-    for_window [window_role="pop-up"] floating enable
-    for_window [window_role="bubble"] floating enable
-    for_window [window_role="task_dialog"] floating enable
-    for_window [window_role="Preferences"] floating enable
-    for_window [window_role="About"] floating enable
-    for_window [window_type="dialog"] floating enable
-    for_window [window_type="menu"] floating enable
-    for_window [instance="__scratchpad"] floating enable
